@@ -1,11 +1,10 @@
 package main
 
 import (
-	"encoding/hex"
 	b64 "encoding/base64"
+	"encoding/hex"
 	"fmt"
 )
-
 
 func main() {
 	// First, we declare our hex as a string
@@ -17,11 +16,17 @@ func main() {
 	}
 	// We can print the hex
 	fmt.Printf("THE HEX: % x\n", hexB)
-	// And also the string it represents, 
+	// And also the string it represents,
 	fmt.Printf("THE STRING: % s\n", hexB)
 
-	// Now we base64 encode:
-	sEnc := b64.StdEncoding.EncodeToString(hexB)
-	fmt.Printf("THE BASE 64: % s\n", sEnc)
-}
+	// Now we base64 encode.
 
+	sEnc := b64.StdEncoding.EncodeToString(hexB)
+	fmt.Printf("THE BASE 64 AS STRING:  % s\n", sEnc)
+
+	// Note: we could use func (enc *Encoding) Encode(dst, src []byte) instead.
+	//var bEnc []byte
+	bEnc := make([]byte, 64)
+	b64.StdEncoding.Encode(bEnc, hexB)
+	fmt.Printf("THE BASE 64 FROM BYTES: % s\n", bEnc)
+}
